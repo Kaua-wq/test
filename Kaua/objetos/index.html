@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedra, Papel e Tesoura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .bot-choice {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #333;
+            font-weight: bold;
+            background-color: #fff3cd;
+            padding: 10px;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pedra, Papel e Tesoura</h1>
+    <div class="button-container">
+        <button id="pedra" onclick="jogar('pedra')">Pedra</button>
+        <button id="papel" onclick="jogar('papel')">Papel</button>
+        <button id="tesoura" onclick="jogar('tesoura')">Tesoura</button>
+    </div>
+    <div class="result" id="result"></div>
+    <div class="bot-choice" id="botChoice"></div>
+
+    <script>
+        function jogar(escolhaJogador) {
+            const escolhas = ['pedra', 'papel', 'tesoura'];
+            const escolhaBot = escolhas[Math.floor(Math.random() * escolhas.length)];
+
+            const resultado = document.getElementById('result');
+            const escolhaBotDiv = document.getElementById('botChoice');
+            const botaoPedra = document.getElementById('pedra');
+            const botaoPapel = document.getElementById('papel');
+            const botaoTesoura = document.getElementById('tesoura');
+
+            botaoPedra.style.backgroundColor = '';
+            botaoPapel.style.backgroundColor = '';
+            botaoTesoura.style.backgroundColor = '';
+
+            escolhaBotDiv.textContent = `🤖 O bot escolheu: ${escolhaBot.toUpperCase()}`};
+
+            if (
+                (escolhaJogador === 'pedra' && escolhaBot === 'tesoura') ||
+                (escolhaJogador === 'papel' && escolhaBot === 'pedra') ||
+                (escolhaJogador === 'tesoura' && escolhaBot === 'papel')
+            ) {
+                resultado.textContent = 'Você ganhou!';
+                document.getElementById(escolhaJogador).style.backgroundColor = 'green';
+            } else if (escolhaJogador === escolhaBot) {
+                resultado.textContent = 'Empate!';
+                document.getElementById(escolhaJogador).style.backgroundColor = 'yellow';
+            } else {
+                resultado.textContent = 'Você perdeu!';
+                document.getElementById(escolhaJogador).style.backgroundColor = 'red';
+            }
+    </script>
+</body>
+</html>
